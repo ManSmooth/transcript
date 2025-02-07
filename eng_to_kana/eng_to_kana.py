@@ -3,6 +3,7 @@
 import argparse
 import os
 import pickledb
+from pickledb import PickleDB
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__)))
 from vowel_converter import VowelConverter
@@ -14,7 +15,7 @@ from morae_kana_converter import MoraeKanaConverter
 class EngToKana:
     def __init__(self):
         dbname = os.path.join(os.path.dirname(__file__), '..', 'cmu_dict', 'cmu_ipa.pickle')
-        self.db = pickledb.load(dbname, False)
+        self.db = PickleDB(dbname)
         self.vowel_fn = VowelConverter().convertVowel
         self.consonant_fn = ConsonantConverter().convertConsonant
         self.epenthetic_fn = EpentheticVowelHandler().addEpentheticVowel
